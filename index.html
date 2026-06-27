@@ -1214,6 +1214,18 @@ heroSec.addEventListener('mousemove', e => {
   const r = heroSec.getBoundingClientRect();
   hx=e.clientX-r.left; hy=e.clientY-r.top;
 });
+heroSec.addEventListener('touchstart', e => {
+  tRad = 420;
+  const r = heroSec.getBoundingClientRect();
+  const t = e.touches[0];
+  hx = t.clientX - r.left; hy = t.clientY - r.top;
+}, { passive: true });
+heroSec.addEventListener('touchmove', e => {
+  const r = heroSec.getBoundingClientRect();
+  const t = e.touches[0];
+  hx = t.clientX - r.left; hy = t.clientY - r.top;
+}, { passive: true });
+heroSec.addEventListener('touchend', () => { tRad = 0; }, { passive: true });
 (function animOv() {
   rad += (tRad-rad)*0.07;
   heroOv.style.clipPath = `circle(${rad.toFixed(1)}px at ${hx}px ${hy}px)`;
