@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNK Travel — 7 Days · Best Lakes of Kyrgyzstan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:    #FDFAF6;
+  --bg2:   #F3EDE4;
+  --bg3:   #E9E0D3;
+  --text:  #160C04;
+  --text2: #4A2E18;
+  --text3: #7A5A44;
+  --rust:  #C14428;
+  --rust-l:#E05030;
+  --amber: #E8923A;
+  --gold:  #C9A34E;
+  --sand:  #D4C4A8;
+  --muted: #8A7060;
+  --hero:  #0D0806;
+  --fast:  0.18s;
+  --mid:   0.35s;
+  --slow:  0.6s;
+  --ease:  cubic-bezier(0.22,1,0.36,1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── INTRO VEIL ── */
+#introVeil {
+  position: fixed; inset: 0;
+  background: var(--hero);
+  z-index: 5000;
+  animation: veilOut 1.2s cubic-bezier(0.4,0,0.2,1) 0.25s forwards;
+  pointer-events: none;
+}
+@keyframes veilOut {
+  from { opacity: 1; visibility: visible; }
+  to   { opacity: 0; visibility: hidden; }
+}
+
+/* ── SCROLL PROGRESS ── */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, var(--rust), var(--amber));
+  pointer-events: none;
+}
+
+/* ── CURSOR ── */
+.cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  width: 7px; height: 7px; background: var(--rust);
+  border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9997;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(193,68,40,0.35);
+  border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%);
+  transition: width var(--mid) var(--ease), height var(--mid) var(--ease),
+              border-color var(--mid) var(--ease);
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: var(--rust); }
+body:has(a:hover) .cursor-dot { background: var(--amber); }
+
+/* ── GRAIN ── */
+.grain {
+  position: fixed; inset: 0; z-index: 9000; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px; mix-blend-mode: multiply;
+}
+
+/* ── LANG ── */
+.lang-btn {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); background: none; border: none; cursor: none;
+  padding: 0.2rem 0.4rem; transition: color var(--fast) var(--ease);
+}
+.lang-btn.active { color: var(--amber); }
+.lang-btn:hover  { color: rgba(255,255,255,0.9); }
+.lang-sep { color: rgba(255,255,255,0.18); font-size: 0.7rem; }
+.nav-scrolled .lang-btn        { color: var(--text3); }
+.nav-scrolled .lang-btn.active { color: var(--rust); }
+.nav-scrolled .lang-btn:hover  { color: var(--text); }
+.nav-scrolled .lang-sep        { color: var(--sand); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.6rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background var(--mid) var(--ease), backdrop-filter var(--mid) var(--ease);
+}
+nav::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(13,8,6,0.65) 0%, transparent 100%);
+  pointer-events: none; z-index: -1;
+  transition: opacity var(--mid) var(--ease);
+}
+.nav-scrolled::before { opacity: 0; }
+.nav-scrolled {
+  background: rgba(253,250,246,0.94);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.nav-logo { display: flex; flex-direction: column; text-decoration: none; }
+.nav-logo-unk {
+  font-size: 1.4rem; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--amber); line-height: 1; transition: color var(--fast) var(--ease);
+}
+.nav-scrolled .nav-logo-unk { color: var(--rust); }
+.nav-logo-sub {
+  font-size: 0.5rem; letter-spacing: 0.46em; text-transform: uppercase;
+  color: rgba(232,146,58,0.45); margin-top: 2px;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none; position: relative;
+  transition: color var(--fast) var(--ease);
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+  background: var(--amber); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--mid) var(--ease);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover { color: #fff; }
+.nav-scrolled .nav-links a       { color: var(--text2); }
+.nav-scrolled .nav-links a:hover { color: var(--rust); }
+.nav-right { display: flex; align-items: center; gap: 1.2rem; }
+.nav-lang  { display: flex; align-items: center; gap: 0.3rem; }
+.nav-cta {
+  padding: 0.48rem 1.3rem; border: 1px solid rgba(232,146,58,0.7);
+  color: var(--amber); font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
+  text-decoration: none; transition: all var(--fast) var(--ease);
+}
+.nav-scrolled .nav-cta { border-color: var(--rust); color: var(--rust); }
+.nav-cta:hover, .nav-scrolled .nav-cta:hover { background: var(--rust); color: #fff; border-color: var(--rust); }
+
+/* ── HERO ── */
+.hero { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+.hero-bg, .hero-ov {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+}
+.hero-bg {
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+  filter: brightness(0.48) saturate(0.82);
+  transform-origin: center;
+}
+.hero-warm {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(193,68,40,0.22) 0%, rgba(232,146,58,0.08) 55%, transparent 100%);
+  pointer-events: none;
+}
+.hero-ov {
+  background-image: url('https://images.unsplash.com/photo-1610720684893-619cd7a5cde5?w=1920&q=85&fit=crop&auto=format');
+  filter: brightness(0.65) saturate(1.1);
+  clip-path: circle(0px at 50% 50%);
+}
+.hero-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 28%, rgba(13,8,6,0.58) 100%);
+  pointer-events: none;
+}
+.hero-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+  background: linear-gradient(to top, rgba(13,8,6,0.96) 0%, transparent 100%);
+  pointer-events: none;
+}
+.hero-ghost {
+  position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(10rem, 20vw, 16rem); font-weight: 400; color: transparent;
+  -webkit-text-stroke: 1px rgba(232,146,58,0.09);
+  line-height: 1; user-select: none; pointer-events: none; z-index: 1;
+}
+.hero-badge {
+  position: absolute; right: 4rem; top: 7rem; z-index: 3;
+  font-size: 0.54rem; letter-spacing: 0.38em; text-transform: uppercase;
+  color: rgba(211,192,168,0.35); pointer-events: none;
+}
+.hero-card {
+  position: absolute; right: 4rem; top: 50%; transform: translateY(-20%); z-index: 3;
+  width: 200px;
+  background: rgba(13,8,6,0.65);
+  border: 1px solid rgba(232,146,58,0.25);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  padding: 1.8rem;
+  transition: border-color var(--mid) var(--ease);
+}
+.hero-card:hover { border-color: rgba(232,146,58,0.52); }
+.hero-card-ey {
+  font-size: 0.5rem; letter-spacing: 0.44em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 0.9rem;
+}
+.hero-card-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem; font-weight: 400; color: #F5F0E8; line-height: 1.1; margin-bottom: 0.3rem;
+}
+.hero-card-route {
+  font-size: 0.58rem; letter-spacing: 0.08em; color: var(--muted);
+  margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(232,146,58,0.13);
+}
+.hero-card-bar { display: flex; gap: 3px; margin-bottom: 0.4rem; }
+.hero-card-seg { flex: 1; height: 2px; background: rgba(232,146,58,0.15); }
+.hero-card-seg.on { background: var(--amber); }
+.hero-card-av {
+  font-size: 0.54rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.3rem;
+}
+.hero-card-cta {
+  display: block; padding: 0.55rem 0; text-align: center;
+  border: 1px solid rgba(232,146,58,0.45);
+  font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--amber); text-decoration: none;
+  transition: background var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.hero-card-cta:hover { background: var(--amber); color: var(--hero); }
+.hero-content {
+  position: absolute; bottom: 0; left: 0;
+  z-index: 2; padding: 0 4rem 5.5rem; width: 58%;
+}
+.hero-tag {
+  font-size: 0.63rem; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-tag::before {
+  content: ''; display: block; width: 2rem; height: 1px;
+  background: var(--amber); flex-shrink: 0;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 7vw, 6.2rem); font-weight: 500; line-height: 0.95;
+  letter-spacing: -0.01em; color: #F5F0E8; margin-bottom: 1.6rem;
+}
+.hero-line { display: block; }
+.hero-title em.hero-line { font-style: italic; color: var(--amber); }
+.hero-days {
+  display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1rem;
+}
+.hero-days-num {
+  font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400;
+  color: rgba(211,192,168,0.2); line-height: 1; letter-spacing: -0.03em;
+}
+.hero-days-label {
+  font-size: 0.58rem; font-weight: 400; letter-spacing: 0.42em; text-transform: uppercase;
+  color: rgba(211,192,168,0.3);
+}
+.hero-sub {
+  font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em;
+  color: rgba(232,220,200,0.7); line-height: 2;
+}
+
+/* ── TOUR BANNER ── */
+.tour-banner {
+  position: relative; overflow: hidden; background: var(--rust);
+  padding: 2.6rem 4rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.tour-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+.tb-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.1; color: #fff;
+}
+.tb-meta {
+  display: flex; flex-direction: column; gap: 0.35rem;
+  font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.65);
+}
+.tb-meta strong { color: #fff; font-weight: 500; }
+.tb-stats { display: flex; gap: 2.5rem; flex-shrink: 0; }
+.tb-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem; font-weight: 400; color: #fff; line-height: 1;
+}
+.tb-stat-label {
+  font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); margin-top: 0.2rem;
+}
+
+/* ── ROUTE INTERACTIVE ── */
+.rv {
+  display: grid; grid-template-columns: 44% 56%;
+  min-height: 88vh; background: var(--hero);
+  border-top: 1px solid rgba(232,146,58,0.08);
+}
+.rv-left {
+  padding: 5rem 4rem;
+  border-right: 1px solid rgba(232,146,58,0.1);
+  display: flex; flex-direction: column;
+}
+.rv-label {
+  font-size: 0.6rem; letter-spacing: 0.44em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1rem; font-weight: 500;
+}
+.rv-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 500; color: #F5F0E8;
+  line-height: 1.1; margin-bottom: 3.5rem;
+}
+.rv-heading em { font-style: italic; color: var(--amber); }
+.rv-stops { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
+.rv-track, .rv-track-fill { display: none; }
+.rv-pip { display: none; }
+.rv-stop {
+  display: block;
+  padding: 0.85rem 1.2rem 0.85rem 1.4rem;
+  cursor: pointer;
+  border: 1px solid rgba(232,146,58,0.1);
+  border-left: 3px solid transparent;
+  background: rgba(255,255,255,0.02);
+  border-radius: 2px;
+  transition: background var(--mid) var(--ease), border-color var(--mid) var(--ease), border-left-color var(--mid) var(--ease);
+}
+.rv-stop:not(.active) { opacity: 1; }
+.rv-stop:hover:not(.active) {
+  background: rgba(232,146,58,0.05);
+  border-color: rgba(232,146,58,0.2);
+  border-left-color: rgba(232,146,58,0.3);
+}
+.rv-stop.active {
+  background: rgba(232,146,58,0.09);
+  border-color: rgba(232,146,58,0.25);
+  border-left-color: var(--amber);
+}
+.rv-stop-num {
+  font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(232,146,58,0.5); margin-bottom: 0.22rem;
+  transition: color var(--fast) var(--ease);
+}
+.rv-stop.active .rv-stop-num { color: var(--amber); }
+.rv-stop-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 500; color: rgba(245,240,232,0.55); line-height: 1.25;
+  transition: color var(--fast) var(--ease);
+}
+.rv-stop.active .rv-stop-title { color: #F5F0E8; font-weight: 600; }
+.rv-stop-note {
+  font-size: 0.58rem; letter-spacing: 0.03em; color: rgba(175,152,130,0.55);
+  margin-top: 0.2rem; max-height: none; overflow: visible; opacity: 1;
+  transition: none;
+}
+.rv-stop.active .rv-stop-note { color: rgba(211,192,168,0.75); }
+.rv-right { position: relative; overflow: hidden; min-height: 88vh; }
+.rv-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0;
+}
+.rv-dim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, var(--hero) 0%, rgba(13,8,6,0.35) 35%, transparent 65%),
+    linear-gradient(to top, rgba(13,8,6,0.65) 0%, transparent 45%);
+  pointer-events: none;
+}
+.rv-caption {
+  position: absolute; bottom: 3rem; left: 3rem; z-index: 2; pointer-events: none;
+}
+.rv-caption-day {
+  font-size: 0.56rem; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 0.5rem;
+}
+.rv-caption-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 400; color: #F5F0E8; line-height: 1.15;
+}
+.rv-caption-km {
+  margin-top: 0.4rem; font-size: 0.6rem; letter-spacing: 0.2em;
+  color: rgba(211,192,168,0.38);
+}
+
+/* ── ITINERARY ── */
+.itinerary { padding: 0 0 4rem; background: var(--bg); }
+.itin-header {
+  padding: 5rem 4rem 3rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1px solid var(--sand);
+}
+.itin-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 600; color: var(--text);
+}
+.itin-heading em { font-style: italic; color: var(--rust); }
+.itin-note { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text3); font-weight: 400; }
+
+/* DAY CARDS — 2-col, no num column */
+.day {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--sand); min-height: 380px;
+}
+.day.alt .day-img { order: -1; }
+.day-info {
+  padding: 3.5rem 4rem; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  transition: background var(--mid) var(--ease);
+}
+.day:hover .day-info { background: rgba(243,237,228,0.55); }
+.day-num-wm {
+  position: absolute; right: -0.5rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(7rem, 11vw, 10rem); font-weight: 400; line-height: 1;
+  color: rgba(193,68,40,0.055); letter-spacing: -0.05em;
+  user-select: none; pointer-events: none;
+  transition: color var(--mid) var(--ease);
+}
+.day:hover .day-num-wm { color: rgba(193,68,40,0.1); }
+.day-location {
+  font-size: 0.58rem; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--rust); margin-bottom: 0.8rem; font-weight: 500;
+}
+.day-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem); font-weight: 400; color: var(--text);
+  line-height: 1.1; margin-bottom: 1.1rem;
+}
+.day-desc {
+  font-size: 0.82rem; line-height: 1.9; color: var(--text2); max-width: 44ch;
+  margin-bottom: 1.4rem; font-weight: 400;
+}
+.day-desc strong { color: var(--text); font-weight: 500; }
+.day-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.day-tag {
+  padding: 0.22rem 0.7rem; border: 1px solid var(--sand);
+  font-size: 0.57rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text2); font-weight: 400;
+  transition: all var(--fast) var(--ease);
+}
+.day:hover .day-tag { border-color: rgba(193,68,40,0.35); color: var(--rust); }
+.day-dist {
+  margin-left: auto; font-size: 0.58rem; letter-spacing: 0.22em;
+  color: var(--text3); white-space: nowrap;
+}
+.day-img { position: relative; overflow: hidden; min-height: 380px; }
+.day-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.87) saturate(1.08);
+  transition: transform var(--slow) var(--ease), filter var(--slow) var(--ease);
+  will-change: transform;
+}
+.day:hover .day-img img { transform: scale(1.05); filter: brightness(0.94) saturate(1.14); }
+.day-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(253,250,246,0.25) 0%, transparent 40%);
+  pointer-events: none;
+}
+.day.alt .day-img-overlay {
+  background: linear-gradient(to left, rgba(253,250,246,0.25) 0%, transparent 40%);
+}
+
+/* ── HIGHLIGHTS ── */
+.highlights { padding: 6rem 4rem; background: var(--bg2); }
+.sec-label {
+  font-size: 0.62rem; letter-spacing: 0.44em; text-transform: uppercase;
+  color: var(--rust); margin-bottom: 0.8rem; font-weight: 500;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600; color: var(--text);
+  margin-bottom: 3.5rem; line-height: 1.1;
+}
+.sec-title em { font-style: italic; color: var(--text3); }
+.hi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.hi-card {
+  background: var(--bg); padding: 2.6rem 2rem;
+  display: flex; flex-direction: column; position: relative; overflow: hidden;
+  border-top: 1px solid rgba(193,68,40,0.1);
+  box-shadow: 0 2px 20px rgba(13,8,6,0.06);
+  transition: transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease);
+}
+.hi-card:hover { box-shadow: 0 6px 32px rgba(13,8,6,0.11); }
+.hi-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--rust); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--mid) var(--ease);
+}
+.hi-card:hover::after { transform: scaleX(1); }
+.hi-card:hover { transform: translateY(-4px); }
+.hi-icon {
+  width: 44px; height: 44px; margin-bottom: 1.6rem; flex-shrink: 0;
+  color: var(--rust);
+}
+.hi-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; line-height: 1.2;
+}
+.hi-card-desc { font-size: 0.79rem; line-height: 1.85; color: var(--text2); flex: 1; font-weight: 400; }
+.hi-card-day {
+  margin-top: 1.5rem; font-size: 0.57rem; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--rust); font-weight: 500;
+}
+
+/* ── LAKE PARALLAX ── */
+.lake {
+  position: relative; height: 70vh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.lake-bg {
+  position: absolute; inset: -20%;
+  background: url('https://images.unsplash.com/photo-1675157935570-e04938711f1e?w=1920&q=85&fit=crop&auto=format') center/cover;
+  filter: brightness(0.48) saturate(1.1); will-change: transform;
+}
+.lake-warm {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(193,68,40,0.16) 0%, rgba(232,146,58,0.07) 50%, transparent 100%);
+  pointer-events: none;
+}
+.lake-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, var(--bg) 0%, transparent 15%, transparent 85%, var(--bg) 100%);
+}
+.lake-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; }
+.lake-ey {
+  font-size: 0.58rem; letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1.2rem;
+}
+.lake-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 10vw, 8rem); font-weight: 500; line-height: 0.9; color: #F5F0E8;
+}
+.lake-title em { font-style: italic; color: rgba(211,196,168,0.55); display: block; }
+.lake-stat {
+  margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem;
+  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(211,196,168,0.6);
+}
+.lake-stat span { color: var(--amber); font-family: 'Playfair Display', serif; font-size: 1.25rem; }
+
+/* ── INCLUDED ── */
+.included { padding: 6rem 4rem; background: var(--bg); }
+.inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--sand); margin-top: 3rem; }
+.inc-col { background: var(--bg); padding: 3rem; }
+.inc-col-title {
+  font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 400; color: var(--text);
+  margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--sand);
+}
+.inc-col.no .inc-col-title { color: var(--text2); }
+.inc-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+.inc-list li {
+  display: flex; gap: 1rem; align-items: flex-start;
+  font-size: 0.82rem; line-height: 1.65; color: var(--text2); font-weight: 400;
+}
+.inc-list li::before {
+  content: '✓'; color: var(--rust); font-size: 0.72rem;
+  flex-shrink: 0; margin-top: 0.15rem; font-weight: 600;
+}
+.inc-col.no .inc-list li::before { content: '×'; color: var(--sand); font-weight: 400; }
+.inc-list li strong { color: var(--text); font-weight: 500; }
+
+/* ── CTA ── */
+.cta {
+  padding: 8rem 4rem; text-align: center; position: relative; overflow: hidden;
+  background: var(--bg2);
+}
+.cta::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 4px; background: linear-gradient(to right, var(--rust), var(--amber));
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-ey {
+  font-size: 0.58rem; letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--rust); margin-bottom: 1.5rem; font-weight: 500;
+}
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 600; line-height: 1.0;
+  color: var(--text); margin-bottom: 1.2rem;
+}
+.cta-title em { font-style: italic; color: var(--rust); }
+.cta-sub {
+  font-size: 0.83rem; color: var(--text2); max-width: 34ch;
+  margin: 0 auto 3rem; line-height: 2; font-weight: 400;
+}
+.cta-btn-wrap { display: inline-block; position: relative; }
+.cta-btn {
+  display: inline-block; padding: 1.1rem 3.5rem;
+  background: var(--rust); color: #fff;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
+  text-decoration: none; transition: background var(--mid) var(--ease), box-shadow var(--mid) var(--ease);
+}
+.cta-btn:hover { background: var(--rust-l); box-shadow: 0 12px 40px rgba(193,68,40,0.28); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2.5rem 4rem; border-top: 1px solid var(--sand); background: var(--bg);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-unk { font-size: 1.2rem; font-weight: 600; color: var(--rust); letter-spacing: 0.06em; }
+.footer-travel { font-size: 0.45rem; letter-spacing: 0.46em; text-transform: uppercase; color: rgba(193,68,40,0.35); margin-top: 2px; }
+.footer-copy { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--text3); }
+.footer-contact { font-size: 0.72rem; color: var(--text2); text-align: right; line-height: 2; }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  nav { padding: 1.4rem 2rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hero-content { padding: 0 2rem 4rem; width: 100%; }
+  .hero-card, .hero-badge, .hero-ghost { display: none; }
+  .hero-title { font-size: clamp(2.2rem, 8vw, 3.8rem); }
+  .hero-sub { font-size: 0.75rem; }
+  .tour-banner { flex-direction: column; padding: 2.5rem 2rem; }
+  .tb-stats { flex-wrap: wrap; gap: 1.2rem; }
+  .rv { grid-template-columns: 1fr; }
+  .rv-right { min-height: 55vw; order: -1; }
+  .rv-left { padding: 3.5rem 2rem; }
+  .rv-heading { margin-bottom: 2rem; }
+  .day { grid-template-columns: 1fr; }
+  .day-img { order: -1; min-height: 240px; }
+  .day.alt .day-img { order: -1; }
+  .day-info { padding: 2.5rem 2rem; }
+  .day-desc { max-width: 100%; }
+  .hi-grid { grid-template-columns: 1fr 1fr; }
+  .hi-card { padding: 2rem 1.5rem; }
+  .lake-title { font-size: clamp(2.6rem, 10vw, 5rem); }
+  .lake-stat { flex-wrap: wrap; gap: 1.5rem; }
+  .inc-grid { grid-template-columns: 1fr; }
+  .cta { padding: 5rem 2rem; }
+  .cta-title { font-size: clamp(2rem, 7vw, 3.8rem); }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
+  .footer-contact { text-align: center; }
+  .itin-header { padding: 4rem 2rem 2rem; flex-direction: column; gap: 0.5rem; }
+  .included, .highlights { padding: 4rem 2rem; }
+  .rv-caption { bottom: 1.5rem; left: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .hero-content { padding: 0 1.5rem 3.5rem; }
+  .hero-title { font-size: clamp(1.9rem, 7.5vw, 2.6rem); }
+  .hero-days-num { font-size: 2rem; }
+  .rv-left { padding: 2.5rem 1.5rem; }
+  .rv-stop { padding: 0.75rem 1rem 0.75rem 1.1rem; }
+  .day-info { padding: 2rem 1.5rem; }
+  .hi-grid { grid-template-columns: 1fr; }
+  .lake-title { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+  .lake-stat { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .inc-col { padding: 2rem 1.5rem; }
+  .cta-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .cta-sub { max-width: 100%; }
+  .cta-btn { padding: 1rem 2rem; }
+  footer { padding: 2rem 1.5rem; }
+}
+
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+</style>
+</head>
+<body>
+
+<div id="introVeil"></div>
+<div id="prog"></div>
+<div class="grain"></div>
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-unk">unk</span>
+    <span class="nav-logo-sub">travel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#route"      data-en="Route"      data-ru="Маршрут">Route</a></li>
+    <li><a href="#program"    data-en="Program"    data-ru="Программа">Program</a></li>
+    <li><a href="#highlights" data-en="Highlights" data-ru="Впечатления">Highlights</a></li>
+    <li><a href="#included"   data-en="Included"   data-ru="Включено">Included</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-lang">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="ru">RU</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-en="Book Now" data-ru="Забронировать">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-warm"></div>
+  <div class="hero-ov" id="heroOv"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-bottom"></div>
+  <svg style="position:absolute;top:0;right:0;width:200px;height:200px;pointer-events:none;opacity:0.18;z-index:2" viewBox="0 0 200 200" fill="none">
+    <path d="M200,0 Q160,0 160,40 Q160,80 120,80 Q80,80 80,120 Q80,160 40,160 Q0,160 0,200" stroke="#E8923A" stroke-width="1.5"/>
+    <circle cx="160" cy="40" r="5" stroke="#E8923A" stroke-width="1" fill="none"/>
+    <circle cx="120" cy="80" r="5" stroke="#E8923A" stroke-width="1" fill="none"/>
+    <circle cx="80"  cy="120" r="5" stroke="#E8923A" stroke-width="1" fill="none"/>
+    <circle cx="40"  cy="160" r="5" stroke="#E8923A" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="hero-ghost">7</div>
+  <div class="hero-badge">41.2°N · 74.5°E · KYRGYZSTAN</div>
+  <div class="hero-card" id="heroCard">
+    <div class="hero-card-ey"   data-en="Next Departure"    data-ru="Ближайший выезд">Next Departure</div>
+    <div class="hero-card-date" data-en="July —<br>September" data-ru="Июль —<br>Сентябрь">July —<br>September</div>
+    <div class="hero-card-route" data-en="7 days · Private tour" data-ru="7 дней · Приватный тур">7 days · Private tour</div>
+    <div class="hero-card-bar">
+      <div class="hero-card-seg on"></div><div class="hero-card-seg on"></div>
+      <div class="hero-card-seg on"></div><div class="hero-card-seg on"></div>
+      <div class="hero-card-seg on"></div><div class="hero-card-seg"></div>
+      <div class="hero-card-seg"></div><div class="hero-card-seg"></div>
+    </div>
+    <div class="hero-card-av"  data-en="5 of 8 spots left"    data-ru="5 из 8 мест">5 of 8 spots left</div>
+    <a href="#contact" class="hero-card-cta" data-en="Get pricing →" data-ru="Узнать стоимость →">Get pricing →</a>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag" id="heroTag" data-en="UNK Travel · Kyrgyzstan" data-ru="UNK Travel · Кыргызстан">UNK Travel · Kyrgyzstan</div>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="hero-line" data-en="Best"          data-ru="Лучшие">Best</span>
+      <em   class="hero-line" data-en="Lakes"         data-ru="озёра">Lakes</em>
+      <span class="hero-line" data-en="of Kyrgyzstan" data-ru="Кыргызстана">of Kyrgyzstan</span>
+    </h1>
+    <div class="hero-days" id="heroDays">
+      <span class="hero-days-num">7</span>
+      <span class="hero-days-label" data-en="days" data-ru="дней">days</span>
+    </div>
+    <p class="hero-sub" id="heroSub"
+       data-en="Issyk-Kul · Son-Kul · Jeti-Oguz · Skazka<br>Private tour May through September"
+       data-ru="Иссык-Куль · Сон-Куль · Жети-Огуз · Скаска<br>Приватный тур с мая по сентябрь">
+      Issyk-Kul · Son-Kul · Jeti-Oguz · Skazka<br>Private tour May through September
+    </p>
+  </div>
+</section>
+
+<!-- TOUR BANNER -->
+<div class="tour-banner">
+  <div>
+    <div class="tb-title" data-en="7-Day Kyrgyzstan's<br>Best Lakes Tour" data-ru="7 дней · Лучшие озёра<br>Кыргызстана">7-Day Kyrgyzstan's<br>Best Lakes Tour</div>
+  </div>
+  <div class="tb-meta">
+    <div><strong data-en="Type:"   data-ru="Тип:">Type:</strong>   <span data-en="Private"         data-ru="Приватный">Private</span></div>
+    <div><strong data-en="Season:" data-ru="Сезон:">Season:</strong> <span data-en="May — September" data-ru="Май — Сентябрь">May — September</span></div>
+    <div><strong data-en="Route:"  data-ru="Маршрут:">Route:</strong>  <span>Bishkek · Issyk-Kul · Karakol · Son-Kul</span></div>
+  </div>
+  <div class="tb-stats">
+    <div class="tb-stat">
+      <div class="tb-stat-num"><span class="count-num" data-to="7">0</span></div>
+      <div class="tb-stat-label" data-en="Days"        data-ru="Дней">Days</div>
+    </div>
+    <div class="tb-stat">
+      <div class="tb-stat-num"><span class="count-num" data-to="6">0</span></div>
+      <div class="tb-stat-label" data-en="Nights"      data-ru="Ночей">Nights</div>
+    </div>
+    <div class="tb-stat">
+      <div class="tb-stat-num"><span class="count-num" data-to="3016">0</span></div>
+      <div class="tb-stat-label" data-en="m elevation" data-ru="м над морем">m elevation</div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUTE INTERACTIVE -->
+<section class="rv" id="route">
+  <div class="rv-left">
+    <div class="rv-label" data-en="Route" data-ru="Маршрут">Route</div>
+    <h2 class="rv-heading" data-en-html="7 days<br>across <em>Kyrgyzstan</em>" data-ru-html="7 дней<br>по <em>Кыргызстану</em>">7 days<br>across <em>Kyrgyzstan</em></h2>
+    <div class="rv-stops" id="rvStops">
+      <div class="rv-track"></div>
+      <div class="rv-track-fill" id="rvTrackFill"></div>
+      <div class="rv-stop active" data-idx="0">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 01" data-ru="День 01">Day 01</div>
+          <div class="rv-stop-title" data-en="Bishkek · Ala Archa" data-ru="Бишкек · Ала-Арча">Bishkek · Ala Archa</div>
+          <div class="rv-stop-note"  data-en="City tour · Mountains · 40 km" data-ru="Экскурсия · Горы · 40 км">City tour · Mountains · 40 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="1">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 02" data-ru="День 02">Day 02</div>
+          <div class="rv-stop-title" data-en="Issyk-Kul · Cholpon-Ata" data-ru="Иссык-Куль · Чолпон-Ата">Issyk-Kul · Cholpon-Ata</div>
+          <div class="rv-stop-note"  data-en="Burana Tower · Petroglyphs · 250 km" data-ru="Башня Бурана · Петроглифы · 250 км">Burana Tower · Petroglyphs · 250 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="2">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 03" data-ru="День 03">Day 03</div>
+          <div class="rv-stop-title" data-en="Jeti-Oguz · Karakol" data-ru="Жети-Огуз · Каракол">Jeti-Oguz · Karakol</div>
+          <div class="rv-stop-note"  data-en="Red canyons · Dungan dinner · 45 km" data-ru="Красные каньоны · Дунганский ужин · 45 км">Red canyons · Dungan dinner · 45 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="3">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 04" data-ru="День 04">Day 04</div>
+          <div class="rv-stop-title" data-en="Skazka · Bokonbaevo · Kochkor" data-ru="Скаска · Боконбаево · Кочкор">Skazka · Bokonbaevo · Kochkor</div>
+          <div class="rv-stop-note"  data-en="Eagle hunting · Felt workshop · 280 km" data-ru="Охота с беркутом · Войлок · 280 км">Eagle hunting · Felt workshop · 280 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="4">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 05" data-ru="День 05">Day 05</div>
+          <div class="rv-stop-title" data-en="Son-Kul · 3,016 m" data-ru="Сон-Куль · 3016 м">Son-Kul · 3,016 m</div>
+          <div class="rv-stop-note"  data-en="Alpine lake · Yurt camp · 140 km" data-ru="Высокогорное озеро · Юрта · 140 км">Alpine lake · Yurt camp · 140 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="5">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 06" data-ru="День 06">Day 06</div>
+          <div class="rv-stop-title" data-en="Son-Kul → Bishkek" data-ru="Сон-Куль → Бишкек">Son-Kul → Bishkek</div>
+          <div class="rv-stop-note"  data-en="Farewell dinner · Osh Bazaar · 250 km" data-ru="Прощальный ужин · Ошский базар · 250 км">Farewell dinner · Osh Bazaar · 250 km</div>
+        </div>
+      </div>
+      <div class="rv-stop" data-idx="6">
+        <div class="rv-pip"></div>
+        <div>
+          <div class="rv-stop-num"   data-en="Day 07" data-ru="День 07">Day 07</div>
+          <div class="rv-stop-title" data-en="Bishkek · Airport" data-ru="Бишкек · Аэропорт">Bishkek · Airport</div>
+          <div class="rv-stop-note"  data-en="Breakfast · Transfer · Departure" data-ru="Завтрак · Трансфер · Вылет">Breakfast · Transfer · Departure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rv-right">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1629340038197-191832a53546?w=1920&q=85&fit=crop&auto=format" alt="Bishkek">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1626767758443-eb78412c0038?w=1920&q=85&fit=crop&auto=format" alt="Issyk-Kul">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1608497735578-11912e18ed9f?w=1920&q=85&fit=crop&auto=format" alt="Jeti-Oguz">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1511181080793-06dba840a1dd?w=1920&q=85&fit=crop&auto=format" alt="Eagle hunting">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1583665470170-92eb0972a9ce?w=1920&q=85&fit=crop&auto=format" alt="Son-Kul">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1743416982500-cd1f71ad7bb1?w=1920&q=85&fit=crop&auto=format" alt="Osh Bazaar">
+    <img class="rv-img" src="https://images.unsplash.com/photo-1553619948-505cc1cdc320?w=1920&q=85&fit=crop&auto=format" alt="Airport">
+    <div class="rv-dim"></div>
+    <div class="rv-caption">
+      <div class="rv-caption-day"   id="rvCapDay">Day 01</div>
+      <div class="rv-caption-title" id="rvCapTitle">Bishkek · Ala Archa</div>
+      <div class="rv-caption-km"    id="rvCapKm">40 km</div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itinerary" id="program">
+  <div class="itin-header">
+    <h2 class="itin-heading" data-en-html="Daily<br><em>itinerary</em>" data-ru-html="Программа<br><em>по дням</em>">Daily<br><em>itinerary</em></h2>
+    <div class="itin-note" data-en="7 days · 6 nights" data-ru="7 дней · 6 ночей">7 days · 6 nights</div>
+  </div>
+
+  <div class="day">
+    <div class="day-info">
+      <div class="day-num-wm">01</div>
+      <div class="day-location" data-en="Bishkek · Ala Archa" data-ru="Бишкек · Ала-Арча">Bishkek · Ala Archa</div>
+      <div class="day-title"    data-en="Capital City &amp;<br>Mountain Gorge" data-ru="Столица &amp;<br>Горное ущелье">Capital City &amp;<br>Mountain Gorge</div>
+      <div class="day-desc"><span data-en="Arrival in Bishkek, transfer and check-in. City tour: <strong>Ala-Too Square</strong>, Manas statue, Victory Square, Osh Bazaar. Afternoon drive to <strong>Ala Archa National Park</strong> (40 km). Trek to Ak-Sai waterfall (2,700 m) through pine forest." data-ru="Прилёт в Бишкек, трансфер и заселение. Обзорная экскурсия: <strong>площадь Ала-Тоо</strong>, Статуя Манаса, Ошский базар. После обеда — <strong>национальный парк Ала-Арча</strong> (40 км). Поход до водопада Ак-Сай через пихтовый лес.">Arrival in Bishkek, transfer and check-in. City tour: <strong>Ala-Too Square</strong>, Manas statue, Victory Square, Osh Bazaar. Afternoon drive to <strong>Ala Archa National Park</strong> (40 km). Trek to Ak-Sai waterfall (2,700 m) through pine forest.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="City"     data-ru="Город">City</span>
+        <span class="day-tag" data-en="Mountains" data-ru="Горы">Mountains</span>
+        <span class="day-tag" data-en="Hiking"   data-ru="Пеший">Hiking</span>
+        <span class="day-dist">40 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1629340038197-191832a53546?w=1920&q=85&fit=crop&auto=format" alt="Bishkek — Manas Monument">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day alt">
+    <div class="day-info">
+      <div class="day-num-wm">02</div>
+      <div class="day-location" data-en="Issyk-Kul · Cholpon-Ata" data-ru="Иссык-Куль · Чолпон-Ата">Issyk-Kul · Cholpon-Ata</div>
+      <div class="day-title"    data-en="Pearl of<br>Central Asia" data-ru="Жемчужина<br>Центральной Азии">Pearl of<br>Central Asia</div>
+      <div class="day-desc"><span data-en="Drive to Issyk-Kul (250 km). En route — <strong>Burana Tower</strong> (XI century, ruins of Balasagun). Then — <strong>Cholpon-Ata petroglyphs</strong>: open gallery of rock carvings from 9,000 BC depicting wolves, ibexes, snow leopards. Night on the north shore." data-ru="Переезд к Иссык-Кулю (250 км). По дороге — <strong>Башня Бурана</strong> (XI в., руины Баласагуна). Далее — <strong>петроглифы Чолпон-Аты</strong>: открытая галерея наскальных рисунков от 9000 до н.э. Ночь на северном берегу.">Drive to Issyk-Kul (250 km). En route — <strong>Burana Tower</strong> (XI century). Then — <strong>Cholpon-Ata petroglyphs</strong>: open gallery of rock carvings from 9,000 BC. Night on the north shore.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Lake"        data-ru="Озеро">Lake</span>
+        <span class="day-tag" data-en="History"     data-ru="История">History</span>
+        <span class="day-tag" data-en="Petroglyphs" data-ru="Петроглифы">Petroglyphs</span>
+        <span class="day-dist">250 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1626767758443-eb78412c0038?w=1920&q=85&fit=crop&auto=format" alt="Burana Tower">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-info">
+      <div class="day-num-wm">03</div>
+      <div class="day-location" data-en="Jeti-Oguz · Karakol" data-ru="Жети-Огуз · Каракол">Jeti-Oguz · Karakol</div>
+      <div class="day-title"    data-en="Seven Bulls &amp;<br>Broken Heart" data-ru="Семь Быков &amp;<br>Разбитое Сердце">Seven Bulls &amp;<br>Broken Heart</div>
+      <div class="day-desc"><span data-en="<strong>Jeti-Oguz gorge</strong> — red rock formations 'Seven Bulls' and 'Broken Heart' amid pine forests. Drive to Karakol (45 km): Przhevalsky museum, <strong>Dungan Mosque</strong> in Chinese style. Dinner with a Dungan family." data-ru="Ущелье <strong>Жети-Огуз</strong> — красные скальные образования «Семь быков» среди хвойных лесов. Переезд в Каракол (45 км): <strong>Дунганская мечеть</strong> в китайском стиле. Ужин в дунганской семье."><strong>Jeti-Oguz gorge</strong> — red rock formations 'Seven Bulls' and 'Broken Heart' amid pine forests. Drive to Karakol (45 km). <strong>Dungan Mosque</strong> in Chinese style. Dinner with a local Dungan family.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Canyon"  data-ru="Каньон">Canyon</span>
+        <span class="day-tag" data-en="Culture" data-ru="Культура">Culture</span>
+        <span class="day-tag" data-en="Gastro"  data-ru="Гастро">Gastro</span>
+        <span class="day-dist">45 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1608497735578-11912e18ed9f?w=1920&q=85&fit=crop&auto=format" alt="Jeti-Oguz red canyons">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day alt">
+    <div class="day-info">
+      <div class="day-num-wm">04</div>
+      <div class="day-location" data-en="Skazka · Bokonbaevo · Kochkor" data-ru="Скаска · Боконбаево · Кочкор">Skazka · Bokonbaevo · Kochkor</div>
+      <div class="day-title"    data-en="Fairy-Tale Canyon<br>&amp; Eagle Hunting" data-ru="Сказочный каньон<br>&amp; Охота с беркутом">Fairy-Tale Canyon<br>&amp; Eagle Hunting</div>
+      <div class="day-desc"><span data-en="South shore of Issyk-Kul (280 km). <strong>Skazka canyon</strong> — red-ochre formations with lake views. In Bokonbaevo — <strong>eagle hunting show</strong> with a local berkutchi. Kochkor: masterclass in traditional <strong>Kyrgyz felt-making</strong>." data-ru="Южный берег Иссык-Куля (280 км). Ущелье <strong>Скаска</strong>. В Боконбаево — <strong>шоу охоты с беркутом</strong>. Кочкор: мастер-класс по <strong>кыргызскому войлоку</strong>. Ночь в семье.">South shore of Issyk-Kul (280 km). <strong>Skazka canyon</strong> — red-ochre formations with lake views. In Bokonbaevo — <strong>eagle hunting show</strong>. Kochkor: masterclass in traditional <strong>felt-making</strong>.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Canyon"   data-ru="Каньон">Canyon</span>
+        <span class="day-tag" data-en="Eagle"    data-ru="Беркут">Eagle</span>
+        <span class="day-tag" data-en="Felt art" data-ru="Войлок">Felt art</span>
+        <span class="day-dist">280 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1511181080793-06dba840a1dd?w=1920&q=85&fit=crop&auto=format" alt="Eagle hunting">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-info">
+      <div class="day-num-wm">05</div>
+      <div class="day-location" data-en="Son-Kul · 3,016 m" data-ru="Сон-Куль · 3016 м">Son-Kul · 3,016 m</div>
+      <div class="day-title"    data-en="Yurt Camp<br>Above the Clouds" data-ru="Юрточный лагерь<br>над облаками">Yurt Camp<br>Above the Clouds</div>
+      <div class="day-desc"><span data-en="Ascent to <strong>Son-Kul lake</strong> (140 km) — 3,016 m above sea level. Treeless nomad plateau. Horse riding, yaks, <strong>golden eagles</strong>. Kumiss-making masterclass. Night in a traditional yurt." data-ru="Подъём к озеру <strong>Сон-Куль</strong> (140 км) — 3016 м н.у.м. Безлесое высокогорное плато. Верховая езда, яки, <strong>беркуты</strong>. Мастер-класс приготовления кумыса. Ночь в юрте.">Ascent to <strong>Son-Kul lake</strong> (140 km) — 3,016 m above sea level. Treeless nomad plateau. Horse riding, yaks, <strong>golden eagles</strong>. Kumiss-making masterclass. Night in a traditional yurt.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Lake"    data-ru="Озеро">Lake</span>
+        <span class="day-tag" data-en="Yurt"    data-ru="Юрта">Yurt</span>
+        <span class="day-tag" data-en="Nomads"  data-ru="Кочевники">Nomads</span>
+        <span class="day-tag" data-en="Horses"  data-ru="Лошади">Horses</span>
+        <span class="day-dist">140 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1583665470170-92eb0972a9ce?w=1920&q=85&fit=crop&auto=format" alt="Son-Kul alpine lake">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day alt">
+    <div class="day-info">
+      <div class="day-num-wm">06</div>
+      <div class="day-location" data-en="Son-Kul → Bishkek" data-ru="Сон-Куль → Бишкек">Son-Kul → Bishkek</div>
+      <div class="day-title"    data-en="Return &amp;<br>Farewell Dinner" data-ru="Возвращение &amp;<br>Прощальный ужин">Return &amp;<br>Farewell Dinner</div>
+      <div class="day-desc"><span data-en="Drive back to Bishkek (250 km), lunch on the way. Free afternoon — <strong>Osh Bazaar</strong>, rest. Evening <strong>farewell dinner</strong> at a traditional Kyrgyz restaurant." data-ru="Переезд в Бишкек (250 км), обед по дороге. Свободный день — <strong>Ошский базар</strong>, отдых. Вечером <strong>прощальный ужин</strong> в традиционном ресторане.">Drive back to Bishkek (250 km), lunch on the way. Free afternoon — <strong>Osh Bazaar</strong>, rest. Evening <strong>farewell dinner</strong> at a traditional Kyrgyz restaurant.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Transfer"  data-ru="Переезд">Transfer</span>
+        <span class="day-tag" data-en="Bishkek"   data-ru="Бишкек">Bishkek</span>
+        <span class="day-tag" data-en="Free time" data-ru="Свободное">Free time</span>
+        <span class="day-dist">250 km</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1743416982500-cd1f71ad7bb1?w=1920&q=85&fit=crop&auto=format" alt="Osh Bazaar">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-info">
+      <div class="day-num-wm">07</div>
+      <div class="day-location" data-en="Bishkek · Airport" data-ru="Бишкек · Аэропорт">Bishkek · Airport</div>
+      <div class="day-title"    data-en="Breakfast &amp;<br>Departure" data-ru="Завтрак &amp;<br>Вылет домой">Breakfast &amp;<br>Departure</div>
+      <div class="day-desc"><span data-en="Breakfast at the hotel. Transfer to Manas International Airport. <strong>End of tour</strong> — Best Lakes of Kyrgyzstan." data-ru="Завтрак в отеле. Трансфер в аэропорт Манас. <strong>Конец тура</strong> — Лучшие озёра Кыргызстана.">Breakfast at the hotel. Transfer to Manas International Airport. <strong>End of tour</strong> — Best Lakes of Kyrgyzstan.</span></div>
+      <div class="day-tags">
+        <span class="day-tag" data-en="Breakfast" data-ru="Завтрак">Breakfast</span>
+        <span class="day-tag" data-en="Transfer"  data-ru="Трансфер">Transfer</span>
+        <span class="day-dist">—</span>
+      </div>
+    </div>
+    <div class="day-img">
+      <img src="https://images.unsplash.com/photo-1553619948-505cc1cdc320?w=1920&q=85&fit=crop&auto=format" alt="Manas Airport">
+      <div class="day-img-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights" id="highlights">
+  <div class="sec-label" data-en="Tour Highlights" data-ru="Впечатления тура">Tour Highlights</div>
+  <h2 class="sec-title" data-en-html="Four moments<br><em>you'll never forget</em>" data-ru-html="Четыре момента,<br><em>которые не забудешь</em>">Four moments<br><em>you'll never forget</em></h2>
+  <div class="hi-grid">
+
+    <div class="hi-card">
+      <div class="hi-icon">
+        <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
+          <path d="M3 14 C9 8 16 12 22 10 C28 8 35 4 41 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M3 14 C7 20 13 22 18 22 C20 23 22 22 24 22 C29 22 35 20 41 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M22 10 L20 23 M22 10 L24 23" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M18 23 L15 30 M22 23 L22 30 M26 23 L29 30" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="37" cy="5" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="hi-card-title" data-en="Eagle Hunting"   data-ru="Охота с беркутом">Eagle Hunting</div>
+      <div class="hi-card-desc"  data-en="Ancient art of eagle hunting — a living transfer of nomadic tradition. Special show with a local berkutchi in Bokonbaevo on Issyk-Kul's south shore." data-ru="Древнее искусство охоты с беркутом — живая передача кочевой традиции. Специальное шоу с местным беркутчи в Боконбаево на берегу Иссык-Куля.">Ancient art of eagle hunting — a living transfer of nomadic tradition. Special show with a local berkutchi in Bokonbaevo on Issyk-Kul's south shore.</div>
+      <div class="hi-card-day"   data-en="Day 4 · Bokonbaevo" data-ru="День 4 · Боконбаево">Day 4 · Bokonbaevo</div>
+    </div>
+
+    <div class="hi-card">
+      <div class="hi-icon">
+        <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+          <path d="M4 27 Q4 11 22 6 Q40 11 40 27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <line x1="22" y1="6"  x2="4"  y2="27" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="22" y1="6"  x2="10" y2="27" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="22" y1="6"  x2="34" y2="27" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="22" y1="6"  x2="40" y2="27" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 3" opacity="0.55"/>
+          <rect x="4" y="27" width="36" height="9" rx="0.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M17 36 L17 30 Q17 27 22 27 Q27 27 27 30 L27 36" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="22" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="hi-card-title" data-en="Yurt at 3,016 m"  data-ru="Юрта 3016 м">Yurt at 3,016 m</div>
+      <div class="hi-card-desc"  data-en="Night in a yurt camp on the Son-Kul high plateau. Hundreds of yurts, countless herds, starry sky with zero city lights." data-ru="Ночь в юрточном лагере на высокогорном плато Сон-Куль. Сотни юрт, бесчисленные стада, звёздное небо без огней цивилизации.">Night in a yurt camp on the Son-Kul high plateau. Hundreds of yurts, countless herds, starry sky with zero city lights.</div>
+      <div class="hi-card-day"   data-en="Day 5 · Son-Kul" data-ru="День 5 · Сон-Куль">Day 5 · Son-Kul</div>
+    </div>
+
+    <div class="hi-card">
+      <div class="hi-icon">
+        <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+          <path d="M6 36 L6 20 Q6 8 16 6 L28 6 Q38 6 38 16 L38 36" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="2" y1="36" x2="42" y2="36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 17 L18 12 L22 17" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="28" cy="14" r="2.5" stroke="currentColor" stroke-width="1.1" fill="none"/>
+          <path d="M13 24 Q17 20 21 24 Q25 28 29 24" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+          <line x1="14" y1="30" x2="26" y2="30" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-dasharray="1.5 2.5"/>
+        </svg>
+      </div>
+      <div class="hi-card-title" data-en="Petroglyphs 9,000 BC"  data-ru="Петроглифы 9000 до н.э.">Petroglyphs 9,000 BC</div>
+      <div class="hi-card-desc"  data-en="Open-air rock art museum in Cholpon-Ata — wolves, ibexes, snow leopards and ritual scenes from 9,000 BC to 3,000 AD on a single hillside." data-ru="Открытый музей наскальных рисунков в Чолпон-Ате — волки, ибексы, снежные барсы, ритуальные сцены от 9000 до н.э. до 3000 н.э.">Open-air rock art museum in Cholpon-Ata — wolves, ibexes, snow leopards and ritual scenes from 9,000 BC to 3,000 AD on a single hillside.</div>
+      <div class="hi-card-day"   data-en="Day 2 · Cholpon-Ata" data-ru="День 2 · Чолпон-Ата">Day 2 · Cholpon-Ata</div>
+    </div>
+
+    <div class="hi-card">
+      <div class="hi-icon">
+        <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+          <rect x="4" y="4" width="36" height="32" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 20 L12 12 L20 20 L12 28 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          <path d="M24 20 L32 12 L40 20 L32 28 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          <line x1="20" y1="20" x2="24" y2="20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 16 L16 20 L12 24 L8 20 Z"  stroke="currentColor" stroke-width="1" fill="none" opacity="0.45"/>
+          <path d="M32 16 L36 20 L32 24 L28 20 Z" stroke="currentColor" stroke-width="1" fill="none" opacity="0.45"/>
+        </svg>
+      </div>
+      <div class="hi-card-title" data-en="Felt-Making Workshop" data-ru="Мастерская войлока">Felt-Making Workshop</div>
+      <div class="hi-card-desc"  data-en="Masterclass in creating traditional Kyrgyz shyrdak in Kochkor. See the whole process and create your own piece of felt carpet to take home." data-ru="Мастер-класс по созданию традиционного кыргызского шырдака в Кочкоре. Весь процесс — и ваш войлочный ковёр на память.">Masterclass in creating traditional Kyrgyz shyrdak in Kochkor. See the whole process and create your own piece of felt carpet to take home.</div>
+      <div class="hi-card-day"   data-en="Day 4 · Kochkor" data-ru="День 4 · Кочкор">Day 4 · Kochkor</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LAKE PARALLAX -->
+<section class="lake" id="lake">
+  <div class="lake-bg" id="lakeBg"></div>
+  <div class="lake-warm"></div>
+  <div class="lake-overlay"></div>
+  <div class="lake-content">
+    <div class="lake-ey" data-en="Pearl of Asia" data-ru="Жемчужина Азии">Pearl of Asia</div>
+    <h2 class="lake-title">Issyk<br><em>-Kul</em></h2>
+    <div class="lake-stat">
+      <div><span>182</span> <span data-en="km long"     data-ru="км в длину">km long</span></div>
+      <div><span>668</span> <span data-en="m deep"      data-ru="м глубина">m deep</span></div>
+      <div><span>+24°C</span> <span data-en="in summer" data-ru="летом">in summer</span></div>
+      <div><span>∞</span>   <span data-en="Never freezes" data-ru="Не замерзает">Never freezes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="included" id="included">
+  <div class="sec-label" data-en="Terms"          data-ru="Условия">Terms</div>
+  <h2 class="sec-title"  data-en="What's in the tour" data-ru="Стоимость тура">What's in the tour</h2>
+  <div class="inc-grid">
+    <div class="inc-col">
+      <div class="inc-col-title" data-en="Included" data-ru="Включено">Included</div>
+      <ul class="inc-list">
+        <li><strong data-en="Accommodation" data-ru="Проживание">Accommodation</strong> — <span data-en="double room, 6 nights" data-ru="двухместный номер, 6 ночей">double room, 6 nights</span></li>
+        <li><strong data-en="Meals"         data-ru="Питание">Meals</strong> <span data-en="per program (breakfasts, lunches, dinners)" data-ru="по программе (завтраки, обеды, ужины)">per program (breakfasts, lunches, dinners)</span></li>
+        <li><strong data-en="All transfers" data-ru="Все трансферы">All transfers</strong> <span data-en="along the route" data-ru="по маршруту">along the route</span></li>
+        <li><strong data-en="English-speaking guide" data-ru="Гид на английском">English-speaking guide</strong></li>
+        <li><span data-en="Entry tickets to all program sites"   data-ru="Входные билеты на все объекты программы">Entry tickets to all program sites</span></li>
+        <li><span data-en="Mineral water throughout the tour"    data-ru="Минеральная вода в течение тура">Mineral water throughout the tour</span></li>
+        <li><strong data-en="Eagle hunting show"        data-ru="Шоу охоты с беркутом">Eagle hunting show</strong> <span data-en="in Bokonbaevo" data-ru="в Боконбаево">in Bokonbaevo</span></li>
+        <li><strong data-en="Felt-making masterclass"   data-ru="Мастер-класс войлока">Felt-making masterclass</strong> <span data-en="in Kochkor" data-ru="в Кочкоре">in Kochkor</span></li>
+      </ul>
+    </div>
+    <div class="inc-col no">
+      <div class="inc-col-title" data-en="Not Included" data-ru="Не включено">Not Included</div>
+      <ul class="inc-list">
+        <li><span data-en="Extra hotel services"              data-ru="Дополнительные услуги отеля">Extra hotel services</span></li>
+        <li><span data-en="Single room supplement"            data-ru="Доплата за одноместное размещение">Single room supplement</span></li>
+        <li><span data-en="Photo/video fees at sites"         data-ru="Фото/видео съёмка на объектах">Photo/video fees at sites</span></li>
+        <li><span data-en="Kyrgyzstan visa &amp; consular fees" data-ru="Консульские сборы и виза">Kyrgyzstan visa &amp; consular fees</span></li>
+        <li><span data-en="Registration in Kyrgyzstan"        data-ru="Регистрация в Кыргызстане">Registration in Kyrgyzstan</span></li>
+        <li><span data-en="Early check-in / late check-out"   data-ru="Ранний заезд / поздний выезд">Early check-in / late check-out</span></li>
+        <li><span data-en="Personal expenses, souvenirs"      data-ru="Личные расходы, сувениры">Personal expenses, souvenirs</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <div class="cta-ey" data-en="UNK Travel · Bishkek" data-ru="UNK Travel · Бишкек">UNK Travel · Bishkek</div>
+    <h2 class="cta-title" data-en-html="Ready for<br><em>the real thing?</em>" data-ru-html="Готов к<br><em>настоящему?</em>">Ready for<br><em>the real thing?</em></h2>
+    <p class="cta-sub" data-en="We'll craft the itinerary for you. Free consultation — we'll quote the price for your dates." data-ru="Напишем маршрут под вас. Бесплатная консультация — скажем стоимость под ваши даты.">We'll craft the itinerary for you. Free consultation — we'll quote the price for your dates.</p>
+    <div class="cta-btn-wrap" id="ctaBtnWrap">
+      <a href="mailto:info@unktravel.com" class="cta-btn" id="ctaBtn" data-en="Write to UNK Travel" data-ru="Написать в UNK Travel">Write to UNK Travel</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" style="text-decoration:none">
+    <div class="footer-unk">unk</div>
+    <div class="footer-travel">travel</div>
+  </a>
+  <p class="footer-copy">© 2026 UNK Travel · Kyrgyzstan</p>
+  <div class="footer-contact">+996 700 000 000<br>info@unktravel.com</div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── ROUTE DATA ──
+const RV_DATA = [
+  { enDay:'Day 01', ruDay:'День 01', enTitle:'Bishkek · Ala Archa',           ruTitle:'Бишкек · Ала-Арча',          enKm:'40 km',  ruKm:'40 км'  },
+  { enDay:'Day 02', ruDay:'День 02', enTitle:'Issyk-Kul · Cholpon-Ata',       ruTitle:'Иссык-Куль · Чолпон-Ата',    enKm:'250 km', ruKm:'250 км' },
+  { enDay:'Day 03', ruDay:'День 03', enTitle:'Jeti-Oguz · Karakol',           ruTitle:'Жети-Огуз · Каракол',        enKm:'45 km',  ruKm:'45 км'  },
+  { enDay:'Day 04', ruDay:'День 04', enTitle:'Skazka · Bokonbaevo · Kochkor', ruTitle:'Скаска · Боконбаево · Кочкор', enKm:'280 km',ruKm:'280 км' },
+  { enDay:'Day 05', ruDay:'День 05', enTitle:'Son-Kul · 3,016 m',             ruTitle:'Сон-Куль · 3016 м',          enKm:'140 km', ruKm:'140 км' },
+  { enDay:'Day 06', ruDay:'День 06', enTitle:'Son-Kul → Bishkek',             ruTitle:'Сон-Куль → Бишкек',          enKm:'250 km', ruKm:'250 км' },
+  { enDay:'Day 07', ruDay:'День 07', enTitle:'Bishkek · Airport',             ruTitle:'Бишкек · Аэропорт',          enKm:'',       ruKm:''       },
+];
+
+// ── LANGUAGE ──
+let currentLang = 'en';
+let currentRvIdx = 0;
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.dataset[lang] ?? el.dataset.en;
+    if (val !== undefined) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    const key = lang + 'Html';
+    const val = el.dataset[key] ?? el.dataset.enHtml;
+    if (val) el.innerHTML = val;
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  updateRvCaption(currentRvIdx);
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// ── SCROLL PROGRESS ──
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+}, { passive: true });
+
+// ── NAV THEME ──
+const mainNav = document.getElementById('mainNav');
+const heroEl  = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('nav-scrolled', window.scrollY > heroEl.offsetHeight * 0.7);
+}, { passive: true });
+
+// ── CURSOR ──
+const dot = document.getElementById('cDot');
+const ring = document.getElementById('cRing');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function animC() {
+  rx += (mx-rx)*0.11; ry += (my-ry)*0.11;
+  dot.style.left  = mx+'px'; dot.style.top  = my+'px';
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animC);
+})();
+
+// ── HERO HOVER REVEAL ──
+const heroSec = document.getElementById('hero');
+const heroOv  = document.getElementById('heroOv');
+let hx=window.innerWidth/2, hy=window.innerHeight/2, rad=0, tRad=0;
+heroSec.addEventListener('mouseenter', () => { tRad=420; });
+heroSec.addEventListener('mouseleave', () => { tRad=0; });
+heroSec.addEventListener('mousemove', e => {
+  const r = heroSec.getBoundingClientRect();
+  hx=e.clientX-r.left; hy=e.clientY-r.top;
+});
+(function animOv() {
+  rad += (tRad-rad)*0.07;
+  heroOv.style.clipPath = `circle(${rad.toFixed(1)}px at ${hx}px ${hy}px)`;
+  requestAnimationFrame(animOv);
+})();
+
+// ── PARALLAX ──
+const lakeBg = document.getElementById('lakeBg');
+window.addEventListener('scroll', () => {
+  const r = lakeBg.closest('.lake').getBoundingClientRect();
+  const pct = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+  lakeBg.style.transform = `translateY(${(pct-0.5)*-90}px)`;
+}, { passive: true });
+
+// ── COUNTERS ──
+function animCounter(el, to, dur=1400) {
+  const t0 = performance.now();
+  (function upd(now) {
+    const t = Math.min((now-t0)/dur, 1);
+    el.textContent = Math.round((1-Math.pow(1-t,3))*to);
+    if (t<1) requestAnimationFrame(upd);
+  })(performance.now());
+}
+document.querySelectorAll('.count-num').forEach(el => {
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) animCounter(el, +el.dataset.to);
+  }, { threshold: 0.5 }).observe(el);
+});
+
+// ── IMAGE TILT ──
+document.querySelectorAll('.day').forEach(card => {
+  const img = card.querySelector('.day-img img');
+  if (!img) return;
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX-r.left)/r.width  - 0.5;
+    const y = (e.clientY-r.top) /r.height - 0.5;
+    img.style.transform = `scale(1.05) translate(${x*8}px,${y*6}px)`;
+  });
+  card.addEventListener('mouseleave', () => { img.style.transform=''; });
+});
+
+// ── MAGNETIC CTA ──
+const ctaWrap = document.getElementById('ctaBtnWrap');
+const ctaBtn  = document.getElementById('ctaBtn');
+if (ctaWrap && ctaBtn) {
+  ctaWrap.addEventListener('mousemove', e => {
+    const r = ctaWrap.getBoundingClientRect();
+    ctaBtn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*0.3}px,${(e.clientY-r.top-r.height/2)*0.3}px)`;
+  });
+  ctaWrap.addEventListener('mouseleave', () => { ctaBtn.style.transform=''; });
+}
+
+// ── ROUTE INTERACTIVE ──
+const rvImgs   = document.querySelectorAll('.rv-img');
+const rvStops  = document.querySelectorAll('.rv-stop');
+const rvFill   = document.getElementById('rvTrackFill');
+const rvCapDay = document.getElementById('rvCapDay');
+const rvCapTit = document.getElementById('rvCapTitle');
+const rvCapKm  = document.getElementById('rvCapKm');
+
+function updateRvCaption(idx) {
+  const d = RV_DATA[idx];
+  rvCapDay.textContent = currentLang==='en' ? d.enDay   : d.ruDay;
+  rvCapTit.textContent = currentLang==='en' ? d.enTitle : d.ruTitle;
+  rvCapKm.textContent  = currentLang==='en' ? d.enKm    : d.ruKm;
+}
+
+function activateRvStop(idx) {
+  if (idx === currentRvIdx) return;
+  const prevImg = rvImgs[currentRvIdx];
+  const nextImg = rvImgs[idx];
+  currentRvIdx  = idx;
+  rvStops.forEach((s,i) => s.classList.toggle('active', i===idx));
+  rvFill.style.height = (idx / (rvStops.length-1) * 100) + '%';
+  gsap.to(prevImg, { opacity:0, duration:0.55, ease:'power2.inOut' });
+  gsap.fromTo(nextImg, { opacity:0, scale:1.07 }, { opacity:1, scale:1, duration:0.85, ease:'power2.out' });
+  gsap.fromTo([rvCapDay, rvCapTit, rvCapKm],
+    { y:10, opacity:0 }, { y:0, opacity:1, stagger:0.07, duration:0.5, ease:'power2.out' }
+  );
+  updateRvCaption(idx);
+}
+
+rvStops.forEach(s => s.addEventListener('click', () => activateRvStop(+s.dataset.idx)));
+
+// ── GSAP HERO ENTRANCE ──
+const motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function initHero() {
+  applyLang('en');
+  gsap.set(rvImgs[0], { opacity: 1 });
+
+  const veil = document.getElementById('introVeil');
+
+  // If tab is hidden (background) or reduced-motion — skip veil instantly
+  if (!motion || document.hidden) {
+    veil.style.animation = 'none';
+    veil.remove();
+    return;
+  }
+
+  // Veil fades via CSS animation; GSAP handles content after veil clears (~1.45s)
+  const tl = gsap.timeline({ delay: 0.9 });
+  tl
+    .fromTo('#heroBg',   { scale:1.12 }, { scale:1, duration:2.8, ease:'expo.out' }, 0)
+    .fromTo('#heroTag',  { y:22, autoAlpha:0 }, { y:0, autoAlpha:1, duration:0.9, ease:'expo.out' }, 0)
+    .fromTo('.hero-line',{ y:52, autoAlpha:0 }, { y:0, autoAlpha:1, stagger:0.13, duration:1.2, ease:'expo.out' }, 0.16)
+    .fromTo('#heroDays', { y:18, autoAlpha:0 }, { y:0, autoAlpha:1, duration:0.7, ease:'expo.out' }, 0.68)
+    .fromTo('#heroSub',  { y:16, autoAlpha:0 }, { y:0, autoAlpha:1, duration:0.7, ease:'expo.out' }, 0.78)
+    .fromTo('#heroCard', { x:48, autoAlpha:0 }, { x:0, autoAlpha:1, duration:1.0, ease:'back.out(1.1)' }, 0.35);
+
+  // Remove veil from DOM after CSS animation completes (1.45s)
+  setTimeout(() => veil.remove(), 1500);
+}
+
+// ── GSAP SCROLL ANIMATIONS ──
+function initScrollAnims() {
+  if (!motion || document.hidden) return;
+
+  const IR = { immediateRender: false };
+
+  gsap.from('.tour-banner > *', {
+    ...IR, y:30, opacity:0, stagger:0.12, duration:0.9, ease:'expo.out',
+    scrollTrigger: { trigger:'.tour-banner', start:'top 82%' }
+  });
+
+  gsap.from(['.rv-label','.rv-heading'], {
+    ...IR, y:36, opacity:0, stagger:0.14, duration:1.0, ease:'expo.out',
+    scrollTrigger: { trigger:'.rv-left', start:'top 80%' }
+  });
+  gsap.from('.rv-stop', {
+    ...IR, x:-28, opacity:0, stagger:0.07, duration:0.85, ease:'expo.out',
+    scrollTrigger: { trigger:'.rv-stops', start:'top 82%' }
+  });
+
+  gsap.from(['.itin-heading','.itin-note'], {
+    ...IR, y:28, opacity:0, stagger:0.12, duration:1.0, ease:'expo.out',
+    scrollTrigger: { trigger:'.itin-header', start:'top 82%' }
+  });
+
+  document.querySelectorAll('.day').forEach(day => {
+    const info  = day.querySelector('.day-info');
+    const img   = day.querySelector('.day-img');
+    const isAlt = day.classList.contains('alt');
+    const st = { trigger:day, start:'top 80%' };
+    gsap.from(info, { ...IR, x: isAlt?34:-34, opacity:0, duration:1.0, ease:'expo.out', scrollTrigger:st });
+    gsap.from(img,  { ...IR, x: isAlt?-34:34, opacity:0, duration:1.0, ease:'expo.out', delay:0.1, scrollTrigger:st });
+  });
+
+  gsap.from(['.sec-label','.sec-title'], {
+    ...IR, y:28, opacity:0, stagger:0.12, duration:0.9, ease:'expo.out',
+    scrollTrigger: { trigger:'.highlights', start:'top 82%' }
+  });
+  gsap.from('.hi-card', {
+    ...IR, y:50, opacity:0, stagger:0.1, duration:0.9, ease:'expo.out',
+    scrollTrigger: { trigger:'.hi-grid', start:'top 80%' }
+  });
+
+  gsap.from('.lake-content > *', {
+    ...IR, y:30, opacity:0, stagger:0.14, duration:1.1, ease:'expo.out',
+    scrollTrigger: { trigger:'.lake-content', start:'top 78%' }
+  });
+
+  gsap.from('.inc-col', {
+    ...IR, y:40, opacity:0, stagger:0.15, duration:1.0, ease:'expo.out',
+    scrollTrigger: { trigger:'.inc-grid', start:'top 82%' }
+  });
+
+  gsap.from(['.cta-ey','.cta-title','.cta-sub','.cta-btn-wrap'], {
+    ...IR, y:35, opacity:0, stagger:0.12, duration:1.0, ease:'expo.out',
+    scrollTrigger: { trigger:'.cta', start:'top 80%' }
+  });
+}
+
+// ── INIT ──
+initHero();
+initScrollAnims();
+</script>
+</body>
+</html>
